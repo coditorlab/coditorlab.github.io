@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Coditor Lite</title>
+	<script src="https://aohycent.github.io/assets/js/jquery.min.js"></script>
+  <link href="assets/css/coditor.css" >
+</head>
+<body>
+  <header>
+  <div class="menu" hidden>
+    <button>Menu</button>
+  </div>
+	<div class="nav">
+		<a>file</a>
+		<a>Find</a>
+		<a>Tools</a>
+    <a>help</a>
+    <a title="Init + alt + S"><button>&#128426; Save</button></a>
+    <a title="Init + alt + Z"><button>&#x21b6; Undo</button></a>
+		<a title="Init + alt + Y"><button>&#x21b7; Redo</button></a>
+	</div>
+  <div class="page-file">
+    <span class="disk" title="This Device">&#128435;</span>
+    <span class="active"><input type="text" class="search-input" value="/home/"></span>
+  </div>
+</header>
+	<div class="main">
+		<textarea name="content" class="cpad"></textarea>
+	</div>
+  <span class="icon">&#8450;&#128192;&#120123;&#120128;&#120139;&#128191;&#8477;</span>
+	<script>
+		var $data = $("textarea[name=content]");
+    var cdtFileSize = $("#Tsize");
+    cdtFileSize.text($data.val().length);
+
+		$data.on("keyup", function(){
+			cdtFileSize.text($data.val().length);
+		});
+	</script>
+</body>
+</html>
