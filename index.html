@@ -1,13 +1,255 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Coditor Lite</title>
-	<script src="/assets/js/jquery.min.js"></script>
-  <link href="./assets/css/coditor.css" >
+	<script src="https://afocha.org/assets/vm/js/jquery.min.js"></script>
 </head>
-<body>
+<style>
+@charset "UTF-8";
+:root {
+  --coditor-theme-text-color: white;
+  --coditor-theme-bg-color: linear-gradient(0deg,rgba(0, 0, 0, 99),rgba(1, 100, 1, 2.6),rgba(0, 0, 0, 99));
+  --coditor-cpad-bg-color: #0f0f0f;
+  --coditor-primary: #0d6efd;
+  --coditor-primary-light: #3a75ff;
+  --coditor-primary-soft: #ceddff;
+  --coditor-primary-dark: #0048f0;
+  --coditor-secondary: #6c757d;
+  --coditor-secondary-light: #d2cdcdf;
+  --coditor-secondary-dark: #d6d5e1;
+  --coditor-success: #198754;
+  --coditor-success-light: #82d6bc;
+  --coditor-success-soft: #def4ed;
+  --coditor-success-dark: #3cb690;
+  --coditor-info: #0dcaf0;
+  --coditor-info-light: #83cbff;
+  --coditor-info-soft: #dcf0ff;
+  --coditor-info-dark: #1d9fff;
+  --coditor-warning: #ffc107;
+  --coditor-warning-light: #ffcf70;
+  --coditor-warning-soft: #fff2d8;
+  --coditor-warning-dark: #fba700;
+  --coditor-danger: #dc3545;
+  --coditor-danger-light: #f68692;
+  --coditor-danger-soft: #fcdde1;
+  --coditor-danger-dark: #ee283c;
+  --coditor-light: #f8f9fa;
+  --coditor-dark: #212529;
+  --coditor-dark-light: #071c4d;
+  --coditor-dark-soft: #c9c7f7;
+  --coditor-dark-dark: #010e2b;
+  --coditor-gray: #6c757d;
+  --coditor-gray-dark: #343a40;
+  --coditor-blue: #0d6efd;
+  --coditor-indigo: #6610f2;
+  --coditor-purple: #6f42c1;
+  --coditor-pink: #d63384;
+  --coditor-red: #dc3545;
+  --coditor-orange: #fd7e14;
+  --coditor-yellow: #ffc107;
+  --coditor-green: #198754;
+  --coditor-teal: #20c997;
+  --coditor-cyan: #0dcaf0;
+  --coditor-white: #fff;
+  --coditor-fade: rgba(255,255,255,0.20);
+  --coditor-font-sans-serif-a: system-ui, -apple-system, "Segoe UI", Roboto,"Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --coditor-font-monospace-a: SFMono-Regular, Menlo, Monaco, Consolas,"Liberation Mono", "Courier New", monospace;
+  --coditor-font-sans-serif: 'Open Sans', sans-serif;
+  --coditor-font-monospace: SFMono-Regular, monospace;
+  --coditor-gradient: linear-gradient(0deg,rgba(0, 0, 0, 99),rgba(1, 100, 1, 2.6),rgba(0, 0, 0, 99));
+  --coditor-x-gradient: linear-gradient(90deg,rgba(0, 0, 0, 99),rgba(1, 100, 1, 2.6),rgba(0, 0, 0, 99));
+  --coditor-scroller: linear-gradient(90deg,rgba(1, 100, 1, 26),rgba(255, 255, 255, 99),rgba(1, 100, 1, 26),rgba(255, 255, 255, 99));
+}
+
+*,::after,::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+button{border-radius:8px; padding:4px;color:var(--coditor-light);background-color:var(--coditor-primary-dark)}
+body {
+  margin: 0;
+  background: var(--coditor-x-gradient); font-size:0.05em;
+  user-select: none;
+  color: var(--coditor-theme-text-color);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+header{position: fixed;}
+.cpad {
+  margin: 0;
+  border-style: none;
+  outline: none;
+  resize: none;
+  width: 100%;
+  min-height: 25em;
+  padding: 4px;
+  color: var(--coditor-theme-text-color);
+  text-shadow: 1px 1px 1px var(--coditor-primary-dark);
+  background: var(--coditor-cpad-bg-color);
+  font-family: monospace;
+  font-size: 0.85rem;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.cpad::-webkit-scrollbar {
+  width: 2em;
+cursor:pointer;
+}
+
+.cpad::-webkit-scrollbar-track {
+  background: var(--coditor-x-gradient);
+  cursor: pointer;
+}
+
+.cpad::-webkit-scrollbar-thumb {
+  background: var(--coditor-scroller);
+  cursor: pointer;
+}
+.main{
+  height: 100%;
+  background: var(--coditor-x-gradient);
+}
+.cli{background-color: white;min-width:100%;hieght:auto;padding:1em;position:fixed;bottom:0;}
+
+
+@media (max-width: 280px) {
+  .menu{
+    display: block !important;
+  }
+  .nav{
+    display: none !important;}
+}
+
+@media (max-height: 700px) {
+  .cpad{
+    height: 600px !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
+}
+
+::-moz-selection {
+  color: inherit;
+  background-color: var(--coditor-fade);
+}
+
+::selection {
+  color: inherit;
+  background-color: var(--coditor-fade);
+}
+.text-center{text-align:center}
+
+abbr[data-bs-original-title],
+abbr[title] {
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
+  cursor: help;
+  -webkit-text-decoration-skip-ink: none;
+  text-decoration-skip-ink: none;
+}
+
+[hidden] {
+  display: none !important;
+}
+  .page-file{
+    cursor: pointer;
+    background: var(--coditor-gray-dark);
+    height: auto;
+    overflow: hidden;
+  }
+	.tab {
+    font-size: 0.80rem;
+		display: inline-block;
+		background: var(--coditor-gray-dark);
+    margin-top: 0.60rem;
+    margin-left: 0.40rem;
+		word-break: keep-all;
+	}
+  .search-input{
+    outline: none;
+    padding-top: 8px;
+    border-style: none;
+    background: var(--coditor-gray-dark);
+    color: var(--coditor-theme-text-color);
+    width: 55%;
+    font-size: 0.80rem;
+  }
+  .active{
+		font-size: 1rem;
+    color: var(--coditor-theme-text-color);
+    background: var(--coditor-theme-bg-color);
+  }
+  .disk {
+    float: left;
+    position: sticky;
+    background: var(--coditor-gradient);
+    font-size: 1rem;
+    padding: 0.39rem;
+  }
+  .icon {
+    bottom: 0;
+    float: right;
+    position: fixed;
+    background: var(--coditor-gradient);
+    font-size: 1rem;
+    z-index: 9999;
+  }
+
+	.nav {
+		display: inline-block;
+		margin: 0;
+		cursor: default;
+		width: 100%;
+    min-height: 1.5rem;
+		padding: 0.20rem;
+  	font-size: 0.90rem;
+  	font-weight: 900;
+		font-family: var(--coditor-font-monospace);
+		color: var(--coditor-white);
+		background: var(--coditor-gradient);
+		text-shadow: -1px 2px 1px var(--coditor-dark-dark);
+	}
+	.nav a{
+		text-decoration: overline;
+    text-transform: uppercase;
+		background-color: var(--coditor-gradient);
+		margin-right: 0.60rem;
+	}
+	.nav a:hover{
+		text-decoration: line-through;
+	}
+  .nav button{
+    float: right;
+    margin-right: 4px;
+  }
+  .close{
+    margin-left: 0.15em;
+  }
+  header{
+    position: static;
+  }
+.alert{z-index:999;border-radius:1px;background-color: #f1f1f1;color:green;font-size:20px}
+</style>
+<body class="active">
+  <form action="/avm/app/coditor" method="post"><input type="hidden" name="old" value="editor/updates.html">
+    <input type="hidden" name="path" value="/home/xsatoshigh/.avm/editor/updates.html">
+
   <header>
   <div class="menu" hidden>
     <button>Menu</button>
@@ -17,27 +259,22 @@
 		<a>Find</a>
 		<a>Tools</a>
     <a>help</a>
-    <a title="Init + alt + S"><button>&#128426; Save</button></a>
-    <a title="Init + alt + Z"><button>&#x21b6; Undo</button></a>
-		<a title="Init + alt + Y"><button>&#x21b7; Redo</button></a>
+    <button type="submit">💾 Save</button>
 	</div>
   <div class="page-file">
-    <span class="disk" title="This Device">&#128435;</span>
-    <span class="active"><input type="text" class="search-input" value="/home/"></span>
+    <span class="disk" title="This Device">💻</span>
+    <span class="active"><input type="text" class="search-input" value="editor/updates.html"></span>
   </div>
 </header>
 	<div class="main">
+		<iframe src="https://raw.githubusercontent.com/aohycent/coditor/main/README.md" style="border:0;height:300vw">
 		<textarea name="content" class="cpad"></textarea>
+<div class="cli text-center bg-dark">
+<div class="alert alert-success"></div>
+</div>
 	</div>
+  
   <span class="icon">&#8450;&#128192;&#120123;&#120128;&#120139;&#128191;&#8477;</span>
-	<script>
-		var $data = $("textarea[name=content]");
-    var cdtFileSize = $("#Tsize");
-    cdtFileSize.text($data.val().length);
-
-		$data.on("keyup", function(){
-			cdtFileSize.text($data.val().length);
-		});
-	</script>
+</form>
 </body>
 </html>
