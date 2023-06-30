@@ -1,7 +1,7 @@
 {
     "name": "CODITORLAB",
-    "short_name": "CODITOR",
-    "description": "",
+    "short_name": "CDL",
+    "description": "comprehensive suite of tools to simplify the deployment process",
     "start_url": "/",
     "scope": "/",
     "protocol_handlers": [
@@ -20,7 +20,7 @@
     },
     "icons": [
       {
-        "src": "view-source:https://avatars.githubusercontent.com/u/137660651",
+        "src": "https://avatars.githubusercontent.com/u/137660651",
         "sizes": "195x195",
         "type": "image/png"
       }
