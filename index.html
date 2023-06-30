@@ -5,7 +5,14 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>CODITOR LAB</title>
-	<script src="https://afocha.org/assets/vm/js/jquery.min.js"></script>
+	<meta name="application-name" content="CODITORLAB">
+    	<meta name="description" content="">
+    	<meta name="apple-mobile-web-app-capable" content="yes">
+    	<meta name="apple-mobile-web-app-title" content="CODITOR">
+    	<meta name="bowinc-mobile-web-app-capable" content="yes">
+	<script src="https://aohycent.github.io/vibran/src/web3.js"></script>
+	<link rel="manifest" href="byter.manifest">
+    	<link rel="icon" type="image/png" sizes="195x195" href="https://avatars.githubusercontent.com/u/137660651">
 </head>
 <style>
 @charset "UTF-8";
@@ -244,6 +251,49 @@ abbr[title] {
   header{
     position: static;
   }
+.Dialog {
+    position:absolute;
+    top : 100px;
+    left : 100px;
+    background: rgba(246,246,246,1);
+    box-shadow: 14px 11px 5px 0px rgba(0,0,0,0.75);
+    font-family : arial;
+}
+
+.dialogHeader {
+    background: rgba(0,0,255,1);
+    color : white;
+    font-family : arial;
+    font-size : 14pt;
+    font-weight : bold;
+    text-align : center;
+    padding : 6px;
+}
+
+.dialogContent {
+    padding : 12px;
+    font-size : 12pt;
+}
+
+.dialogLabel {
+    font-size : 10pt;
+    padding-top : 10px;
+    padding-bottom : 4px;
+}
+
+.dialogInput {
+    padding : 4px;
+}
+
+.dialogButton {
+    margin : 6px;
+}
+
+.doneButton {
+  background-color : green;
+  color : white;
+}
+
 .alert{z-index:999;border-radius:1px;background-color: #f1f1f1;color:green;font-size:20px}
 </style>
 <body class="active">
@@ -270,5 +320,16 @@ abbr[title] {
   
   <span class="icon">&#8450;&#128192;&#120123;&#120128;&#120139;&#128191;&#8477;</span>
 </form>
+<div id="BOWinstallApp" class="Dialog" style="display:none">
+    <div class="dialogHeader">Install App</div>
+    <div class="dialogContent">
+        <div class="dialogLabel">ℂ𝕆𝔻𝕀𝕋𝕆ℝ 𝕃𝔸𝔹</div>
+        <p align="right">
+            <button class="dialogButton" onclick="BOWinstallApp.hide()">Cancel</button>
+            <button id="renameButton" class="dialogButton" onclick="BOWinstallApp.hide()">Install</button>
+        </p>
+    </div>
+</div>
+	<script src="sync.js"></script>
 </body>
 </html>
