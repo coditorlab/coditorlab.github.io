@@ -1,0 +1,33 @@
+{
+    "name": "CODITORLAB",
+    "short_name": "CODITOR",
+    "description": "",
+    "start_url": "/",
+    "scope": "/",
+    "protocol_handlers": [
+      {
+        "protocol": "fdp",
+        "url": "api/fdp/%s"
+      },{
+        "protocol": "otsl",
+        "url": "api/otsl/%s"
+      }
+    ],
+    "serviceworker": {
+      "src": "sw.js",
+      "scope": "/",
+      "update_via_cache": "coditorlab_"
+    },
+    "icons": [
+      {
+        "src": "view-source:https://avatars.githubusercontent.com/u/137660651",
+        "sizes": "195x195",
+        "type": "image/png"
+      }
+    ],
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "lang": "en",
+    "theme_color": "#198754",
+    "background_color": "#0f0f0f"
+  }
