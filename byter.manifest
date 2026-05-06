@@ -1,22 +1,22 @@
 {
     "name": "CODITORLAB",
-    "short_name": "CDL",
-    "description": "comprehensive suite of tools to simplify the deployment process",
+    "short_name": "CODITOR",
+    "description": "Comprehensive Utility & Networking Software Development Kit Management & Maintenance Tool",
     "start_url": "/",
     "scope": "/",
     "protocol_handlers": [
       {
-        "protocol": "fdp",
-        "url": "api/fdp/%s"
+        "protocol": "web+bow",
+        "url": ".ott/bow/%s"
       },{
-        "protocol": "otsl",
-        "url": "api/otsl/%s"
+        "protocol": "web+otsl",
+        "url": ".ott/otsl/%s"
       }
     ],
     "serviceworker": {
-      "src": "sw.js",
+      "src": "./sw.js",
       "scope": "/",
-      "update_via_cache": "coditorlab_"
+      "update_via_cache": "ott.coditorlab."
     },
     "icons": [
       {
