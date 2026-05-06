@@ -23,7 +23,7 @@ if (!isSecureContext) {
   }
   
   document.querySelector('#BOWregProto').addEventListener('click', () => {
-    navigator.registerProtocolHandler('fdp', 'api/fdp/%s');
-    navigator.registerProtocolHandler('otsl', 'api/otsl/%s');
+    navigator.registerProtocolHandler('web+bow', '.ott/bow/%s');
+    navigator.registerProtocolHandler('web+otsl', '.ott/otsl/%s');
   });
 })();
