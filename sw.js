@@ -1,5 +1,5 @@
-const CACHE = "coditorlab_";
-const ASSETS = ["index.html","assets/css/coditor.css","assets/js/script.js"];
+const CACHE = "ott.coditorlab.";
+const ASSETS = ["./index.html","./assets/css/coditor.css","./assets/js/script.js"];
 
 self.addEventListener("install", e => {
   e.waitUntil(
